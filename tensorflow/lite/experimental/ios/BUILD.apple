@@ -45,6 +45,7 @@ tflite_ios_static_framework(
     minimum_os_version = TFL_MINIMUM_OS_VERSION,
     whitelist_symbols_file = ":whitelist_TensorFlowLiteC.txt",
     deps = [
+        "//tensorflow/lite/delegates/flex:delegate",
         ":tensorflow_lite_c",
     ],
 )
@@ -62,8 +63,14 @@ ios_static_framework(
     name = "TensorFlowLiteSelectTfOps_framework",
     bundle_name = "TensorFlowLiteSelectTfOps",
     minimum_os_version = TFL_MINIMUM_OS_VERSION,
+    hdrs = [
+        ":xnnpack_delegate.h",
+        "//tensorflow/lite/c:c_api.h",
+        "//tensorflow/lite/c:common.h",
+    ],
     deps = [
         "//tensorflow/lite/delegates/flex:delegate",
+        ":tensorflow_lite_c",
     ],
 )
 
